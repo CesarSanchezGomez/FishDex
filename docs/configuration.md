@@ -188,6 +188,7 @@ undiscovered entries always go last. Both choices are saved per player.
 
 ### PlaceholderAPI
 
-With PlaceholderAPI installed, any menu text also accepts `%placeholder%`, resolved for the viewer. The value
-is inserted as text and never interpreted as MiniMessage, so a player-controlled value (a nickname, a
-prefix) cannot inject formatting or click actions. Legacy colour codes in the value are kept.
+With PlaceholderAPI installed, any menu text also accepts `%placeholder%`, resolved for the viewer. Legacy
+colour codes in the value (`&a`, `§a`, `&#RRGGBB`, `§x§R§R§G§G§B§B`) are kept, while MiniMessage tags in it
+are shown as plain text, so a player-controlled value (a nickname, a prefix) cannot inject formatting or
+click actions.

@@ -11,7 +11,6 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -32,8 +31,6 @@ public final class IconRenderer {
 
     private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
     private static final Pattern EXTERNAL_PLACEHOLDER = Pattern.compile("%([A-Za-z0-9_.:-]+)%");
-    private static final LegacyComponentSerializer LEGACY = LegacyComponentSerializer.builder()
-            .character('§').hexColors().useUnusualXRepeatedCharacterHexFormat().build();
 
     private final PlaceholderResolver placeholders;
 
@@ -95,10 +92,7 @@ public final class IconRenderer {
         }
     }
 
-    /**
-     * Swaps each {@code %placeholder%} for an indexed {@code <ext:n>} tag. The value is inserted as a finished
-     * component, never parsed as MiniMessage, so a player-controlled placeholder cannot inject tags.
-     */
+    /** Swaps each {@code %placeholder%} for an indexed {@code <ext:n>} tag, resolved by {@link #externalValue}. */
     private static String withExternalTags(String text, List<String> external) {
         Matcher matcher = EXTERNAL_PLACEHOLDER.matcher(text);
         StringBuilder out = new StringBuilder();
@@ -119,9 +113,22 @@ public final class IconRenderer {
             if (index < 0 || index >= external.size()) {
                 return Tag.selfClosingInserting(Component.empty());
             }
-            String placeholder = external.get(index);
-            return Tag.selfClosingInserting(LEGACY.deserialize(placeholders.resolve(viewer, placeholder)));
+            return Tag.selfClosingInserting(externalValue(placeholders.resolve(viewer, external.get(index))));
         });
+    }
+
+    /**
+     * Placeholder output often carries legacy codes ({@code &a}, {@code §a}, hex), which MiniMessage cannot
+     * parse. Its own tags are escaped first, so a player-controlled value (a nickname) keeps its colours but
+     * cannot inject formatting or click actions; then the legacy codes become tags and the result is parsed.
+     */
+    private static Component externalValue(String value) {
+        String safe = NameFormatting.legacyToMiniMessage(MINI_MESSAGE.escapeTags(value));
+        try {
+            return MINI_MESSAGE.deserialize(safe);
+        } catch (RuntimeException malformed) {
+            return Component.text(value);
+        }
     }
 
     private List<Component> renderLore(List<String> lines, Player viewer, TagResolver resolver, Accent accent) {

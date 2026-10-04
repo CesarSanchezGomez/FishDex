@@ -3,6 +3,7 @@ package com.cesarcosmico.fishdex.menu;
 import com.cesarcosmico.fishdex.text.PlaceholderResolver;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class IconRendererTest {
 
@@ -20,9 +22,18 @@ class IconRendererTest {
     }
 
     private static boolean anyRed(Component component) {
+        return hasColor(component, NamedTextColor.RED);
+    }
+
+    private static boolean hasColor(Component component, TextColor color) {
         List<Component> all = new ArrayList<>();
         collect(component, all);
-        return all.stream().anyMatch(c -> NamedTextColor.RED.equals(c.color()));
+        return all.stream().anyMatch(c -> color.equals(c.color()));
+    }
+
+    private static Component renderPlaceholder(String value) {
+        IconRenderer renderer = new IconRenderer((viewer, placeholder) -> value);
+        return renderer.render("%value%", null, TagResolver.empty(), IconRenderer.Accent.NONE);
     }
 
     private static void collect(Component component, List<Component> out) {
@@ -58,5 +69,31 @@ class IconRendererTest {
                 IconRenderer.Accent.of(List.of("#FF0000")));
 
         assertEquals("FishDex", plain(rendered));
+    }
+
+    @Test
+    void legacyCodesInPlaceholderOutputBecomeColours() {
+        Component rendered = renderPlaceholder("&aGreen");
+
+        assertEquals("Green", plain(rendered));
+        assertTrue(hasColor(rendered, NamedTextColor.GREEN));
+    }
+
+    @Test
+    void bothHexFormatsInPlaceholderOutputAreApplied() {
+        TextColor green = TextColor.fromHexString("#00ff00");
+
+        assertTrue(hasColor(renderPlaceholder("&#00ff00X"), green));
+        assertTrue(hasColor(renderPlaceholder("§x§0§0§f§f§0§0X"), green));
+        assertEquals("X", plain(renderPlaceholder("§x§0§0§f§f§0§0X")));
+    }
+
+    @Test
+    void legacyColoursWorkButTagsStayLiteral() {
+        Component rendered = renderPlaceholder("&a<red>evil");
+
+        assertEquals("<red>evil", plain(rendered));
+        assertTrue(hasColor(rendered, NamedTextColor.GREEN));
+        assertFalse(anyRed(rendered));
     }
 }

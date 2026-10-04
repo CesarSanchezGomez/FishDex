@@ -10,8 +10,15 @@ fun v(name: String): String = property(name) as String
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc" }
-    maven("https://repo.momirealms.net/releases/") { name = "momirealms" }
-    maven("https://repo.extendedclip.com/releases/") { name = "extendedclip" }
+    // Each plugin repository only serves its own group, so a slow or failing one cannot break other lookups.
+    maven("https://repo.momirealms.net/releases/") {
+        name = "momirealms"
+        content { includeGroup("net.momirealms") }
+    }
+    maven("https://repo.extendedclip.com/releases/") {
+        name = "extendedclip"
+        content { includeGroup("me.clip") }
+    }
 }
 
 dependencies {

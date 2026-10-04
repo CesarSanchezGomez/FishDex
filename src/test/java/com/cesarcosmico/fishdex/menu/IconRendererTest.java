@@ -4,6 +4,7 @@ import com.cesarcosmico.fishdex.text.PlaceholderResolver;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.junit.jupiter.api.Test;
@@ -95,5 +96,36 @@ class IconRendererTest {
         assertEquals("<red>evil", plain(rendered));
         assertTrue(hasColor(rendered, NamedTextColor.GREEN));
         assertFalse(anyRed(rendered));
+    }
+
+    @Test
+    void eachPlaceholderReachesPlaceholderApiWholeAndOnce() {
+        List<String> asked = new ArrayList<>();
+        IconRenderer renderer = new IconRenderer((viewer, placeholder) -> {
+            asked.add(placeholder);
+            return "x";
+        });
+
+        renderer.render("%math_{player_level}*2% and %formatter_number_1 000%", null, TagResolver.empty(),
+                IconRenderer.Accent.NONE);
+
+        assertEquals(List.of("%math_{player_level}*2%", "%formatter_number_1 000%"), asked);
+    }
+
+    @Test
+    void percentSignsAroundTagsAreNotPlaceholders() {
+        List<String> asked = new ArrayList<>();
+        IconRenderer renderer = new IconRenderer((viewer, placeholder) -> {
+            asked.add(placeholder);
+            return "x";
+        });
+
+        Component rendered = renderer.render("<gray><progress>%</gray> of 5%", null,
+                TagResolver.resolver("progress", (arguments, context) ->
+                        Tag.selfClosingInserting(Component.text("40"))),
+                IconRenderer.Accent.NONE);
+
+        assertTrue(asked.isEmpty());
+        assertEquals("40% of 5%", plain(rendered));
     }
 }

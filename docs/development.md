@@ -65,6 +65,7 @@ The key everywhere is the CustomFishing loot id. Timestamps are epoch millisecon
 - Repository futures complete on that thread. Code that then touches players or inventories hops back with
   `player.getScheduler().run(...)`, which also skips the work if the player has left.
 - CustomFishing is read on the main thread.
+- PlaceholderAPI is called on the main thread, while rendering menus; expansions may read Bukkit state.
 - On disable, queued writes are drained (up to 10 seconds) before the pool closes.
 
 Architecture conventions shared with the other CesarCosmico plugins are described in the workspace's

@@ -30,7 +30,9 @@ import java.util.regex.Pattern;
 public final class IconRenderer {
 
     private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
-    private static final Pattern EXTERNAL_PLACEHOLDER = Pattern.compile("%([A-Za-z0-9_.:-]+)%");
+    // PlaceholderAPI's own pattern (%[^%]+%), minus tag brackets and line breaks so a match never spans
+    // MiniMessage tags: "<progress>% ... <x>%" is not a placeholder, "%math_{player_level}*2%" is.
+    private static final Pattern EXTERNAL_PLACEHOLDER = Pattern.compile("%([^%<>\\n]+)%");
 
     private final PlaceholderResolver placeholders;
 
@@ -82,9 +84,9 @@ public final class IconRenderer {
     }
 
     public Component render(String template, Player viewer, TagResolver resolver, Accent accent) {
-        List<String> external = new ArrayList<>();
-        String prepared = withExternalTags(NameFormatting.legacyToMiniMessage(accent.apply(template)), external);
-        TagResolver all = TagResolver.resolver(resolver, externalResolver(external, viewer));
+        List<Component> external = new ArrayList<>();
+        String prepared = withExternalTags(NameFormatting.legacyToMiniMessage(accent.apply(template)), viewer, external);
+        TagResolver all = TagResolver.resolver(resolver, externalResolver(external));
         try {
             return MINI_MESSAGE.deserialize("<!italic>" + prepared, all);
         } catch (RuntimeException malformed) {
@@ -92,28 +94,29 @@ public final class IconRenderer {
         }
     }
 
-    /** Swaps each {@code %placeholder%} for an indexed {@code <ext:n>} tag, resolved by {@link #externalValue}. */
-    private static String withExternalTags(String text, List<String> external) {
+    /**
+     * Resolves each {@code %placeholder%} once, here, and leaves an indexed {@code <ext:n>} tag in its place.
+     * Resolving inside the tag instead would call the expansion twice, because MiniMessage resolves every tag
+     * more than once while parsing.
+     */
+    private String withExternalTags(String text, Player viewer, List<Component> external) {
         Matcher matcher = EXTERNAL_PLACEHOLDER.matcher(text);
         StringBuilder out = new StringBuilder();
         while (matcher.find()) {
-            external.add(matcher.group());
+            external.add(externalValue(placeholders.resolve(viewer, matcher.group())));
             matcher.appendReplacement(out, "<ext:" + (external.size() - 1) + ">");
         }
         matcher.appendTail(out);
         return out.toString();
     }
 
-    private TagResolver externalResolver(List<String> external, Player viewer) {
+    private static TagResolver externalResolver(List<Component> external) {
         if (external.isEmpty()) {
             return TagResolver.empty();
         }
         return TagResolver.resolver("ext", (arguments, context) -> {
             int index = arguments.popOr("missing placeholder index").asInt().orElse(-1);
-            if (index < 0 || index >= external.size()) {
-                return Tag.selfClosingInserting(Component.empty());
-            }
-            return Tag.selfClosingInserting(externalValue(placeholders.resolve(viewer, external.get(index))));
+            return Tag.selfClosingInserting(index >= 0 && index < external.size() ? external.get(index) : Component.empty());
         });
     }
 

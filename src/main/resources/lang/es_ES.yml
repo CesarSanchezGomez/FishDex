@@ -1,0 +1,12 @@
+prefix: "<white>[</white><gradient:#93EDC7:#1CD8D2>FishDex</gradient><white>]</white> "
+
+command:
+  version: "<prefix><white>FishDex <green><version></green> — motor CustomFishing <green><engine></green>.</white>"
+  reloaded: "<prefix><green>Configuración recargada.</green>"
+  reload-failed: "<prefix><red>La recarga falló: <error>. Se mantiene la configuración anterior; revisa la consola.</red>"
+  usage: "<prefix><gray>Uso: <white>/fishdex [menú]</white> · <white>/fishdex reload</white> · <white>/fishdex version</white></gray>"
+
+fishdex:
+  error: "<prefix><red>No se pudo abrir la FishDex ahora mismo. Inténtalo de nuevo.</red>"
+  unknown-category: "<prefix><red>Esa colección no existe. Usa TAB para ver las disponibles.</red>"
+

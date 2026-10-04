@@ -1,0 +1,69 @@
+# ==========================================================================
+#  Collection TEMPLATE (not loaded: files starting with "_" are ignored).
+#  Copy as collections/<id>.yml; the <id> (file name) is what /fishdex <id> opens.
+#  A file under collections/ is a COLLECTION (renders a CustomFishing category's
+#  fish). For the index menu, see ../fishdex.yml.
+#
+#  Self-contained: nothing is inherited. 'category', 'discovered' and 'undiscovered'
+#  are required; the rest is optional (no 'decorations' = no frame; drop a button
+#  to hide it; trim/reorder any lore). Fallbacks in code: rows 6, content-slots 18-35.
+#
+#  Global settings live in ../settings.yml (date-format, sort, sort-cycle, sort-labels,
+#  content-layout default); do not set them here. A collection MAY override
+#  'content-layout'. A button's 'page' pins it to that page; controls (and 'page: all') show on every page.
+#
+#  Buttons carry an 'action': open:root, open:<id>, previous_page, next_page, close,
+#  sort. Item format: material + components { custom-name, lore, item-model,
+#  custom-model-data (number or list), profile (head), hide-tooltip }. Decorations resolve placeholders
+#  (<progress> <progress-bar> <discovered> <total> <discovered-padded> <total-padded>
+#   <player-caught> <global-caught> <player>).
+#  Colours: 'colors' (1 = solid, 2+ = gradient); wrap text with {colors}…{/colors}.
+# ==========================================================================
+
+category: my_cf_category
+title: "{colors}<b>My collection</b>{/colors} <white><page>/<page-count></white>"
+colors: ["#FFFFFF", "#AAAAAA"]
+# rows: 6
+# content-slots: "18-35"
+# content-layout: centered       # overrides settings.yml (single-page only; 2+ pages pack left-to-right).
+# open-sound: "minecraft:entity.fishing_bobber.splash"   # sound on open; remove for silence.
+
+decorations:
+  corners:   { slots: "0,8,45,53",      material: WHITE_STAINED_GLASS_PANE, components: { hide-tooltip: true } }
+  edges:     { slots: "1,7,46,52",      material: WHITE_STAINED_GLASS_PANE, components: { hide-tooltip: true } }
+  coral-fan: { slots: "2,6,47,51",      material: TUBE_CORAL_FAN, components: { hide-tooltip: true } }
+  coral:     { slots: "3,4,5,48,49,50", material: TUBE_CORAL,     components: { hide-tooltip: true } }
+  # A decoration with placeholders (drawn after the frame so it wins its slot):
+  sightings:
+    slots: "4"
+    material: SPYGLASS
+    components:
+      custom-name: "{colors}<b>Sightings</b>{/colors}"
+      lore:
+        - " <white>👤 Player</white><gray>: <player>.</gray> "
+        - " <white>🔎 Sightings</white><gray>: <discovered-padded>/<total-padded>.</gray> "
+        - " <white>🐟 Progress</white> <progress-bar> <gray><progress>%</gray> "
+
+discovered:
+  components:
+    custom-name: "{colors}<name-plain>{/colors}"
+    lore:
+      - "  <white>• Caught</white><gray>: <count>.</gray> "
+      - "  <white>• Record</white><gray>: <record>cm [<record-holder>].</gray> "
+      - " <b>{colors}-= MY COLLECTION =-{/colors}</b> "
+
+undiscovered:
+  material: PLAYER_HEAD
+  components:
+    profile: "<head-base64>"
+    custom-name: "{colors}<b>¿ <name-plain> ?</b>{/colors}"
+    lore:
+      - "  <gray>Catch it at least once to unlock your stats. "
+
+buttons:
+  back:  { slot: 45, action: open:root,      material: PLAYER_HEAD, components: { profile: "<head-base64>", custom-name: "{colors}<b>« Back</b>{/colors}" } }
+  sort:  { slot: 0,  action: sort,           material: HOPPER,      components: { custom-name: "{colors}<b>Sort</b>{/colors}", lore: [ " <white>Order:</white> <gray><sort-mode>.</gray> ", "<grouping-hint>" ] } }
+  previous: { slot: 48, action: previous_page, sound: "minecraft:item.book.page_turn", material: PLAYER_HEAD, components: { profile: "<head-base64>", custom-name: "{colors}<b>« Previous</b>{/colors}" } }
+  next:  { slot: 50, action: next_page,      sound: "minecraft:item.book.page_turn", material: PLAYER_HEAD, components: { profile: "<head-base64>", custom-name: "{colors}<b>Next »</b>{/colors}" } }
+  close: { slot: 49, action: close,          sound: "minecraft:ui.button.click",     material: PLAYER_HEAD, components: { profile: "<head-base64>", custom-name: "{colors}<b>Close</b>{/colors}" } }
+  # link:  { slot: 8, action: open:other, material: PLAYER_HEAD, components: { custom-name: "{colors}Other »{/colors}" } }

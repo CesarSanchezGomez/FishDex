@@ -1,0 +1,153 @@
+# Root menu (/fishdex). Index of collections; edit freely.
+title: '{colors}<b>Collections</b>{/colors} <white><page>/<page-count></white>'
+rows: 6
+colors:
+- '#93EDC7'
+- '#1CD8D2'
+filler:
+  enabled: false
+open-sound: minecraft:ambient.underwater.enter
+decorations:
+  corners:
+    slots: 0,8,45,53
+    material: BLUE_STAINED_GLASS_PANE
+    components:
+      hide-tooltip: true
+  edges:
+    slots: 1,7,46,52
+    material: LIGHT_BLUE_STAINED_GLASS_PANE
+    components:
+      hide-tooltip: true
+  coral-fan:
+    slots: 2,6,47,51
+    material: TUBE_CORAL_FAN
+    components:
+      hide-tooltip: true
+  coral:
+    slots: 3,4,5,48,49,50
+    material: TUBE_CORAL
+    components:
+      hide-tooltip: true
+  progress:
+    slots: '4'
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTdiZmIxZGE2NTU0NjgzODY2Y2QwYmFhNzQ0OTc3ZDAyM2MyMzEzNjYwZDMyYmI3NTM5MmVlZjczYmQwNTc1MyJ9fX0=
+      custom-name: '{colors}<b>FishDex</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>🎣 Caught</white><gray>: <player-caught>.</gray> '
+      - ' <white>🐟 Progress</white> <progress-bar> <gray><progress>%</gray> '
+      - ' '
+buttons:
+  common:
+    slot: 20
+    action: open:common
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU0OTVlNzk0ZjFmNmRlYjFmOGMzYmM5M2IzNmE2M2RhMThiNDcxNTMzYjkwNGM3NmU0M2Y5YjRmMjI3OGM2MCJ9fX0=
+      custom-name: '{colors}<b>Common collection</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>🎣 Global catches</white><gray>: <global-caught>.</gray> '
+      - ' '
+  singular:
+    slot: 21
+    action: open:singular
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjNiMWIwNjI4YjNiYWYwZTY3NWE2NTY0NTEyODNkOThkYzlmZjc2ODNjMDJiNDhiMDczN2ZjODQ1ZWU4OTk3NiJ9fX0=
+      custom-name: '{colors}<b>Singular collection</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>🎣 Global catches</white><gray>: <global-caught>.</gray> '
+      - ' '
+  rare:
+    slot: 22
+    action: open:rare
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODYwMTZiZTVjNWQ2ZjlmYzM1MDU5YTEzOGIyZmY2OWZhOThhMTFjNThiYTdjNTMzMDNhNmQ5Mzg0MmI4Mzk2In19fQ==
+      custom-name: '{colors}<b>Rare collection</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>🎣 Global catches</white><gray>: <global-caught>.</gray> '
+      - ' '
+  epic:
+    slot: 23
+    action: open:epic
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjYzMzk2ODY2YTc1Mjc5ZDQ3OTA3MTE2NzZmOTI1ODMzMDdkYjZkNjgwNGZhYjdmMDRkYWMyYTI0NDBmZDFlMCJ9fX0=
+      custom-name: '{colors}<b>Epic collection</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>🎣 Global catches</white><gray>: <global-caught>.</gray> '
+      - ' '
+  legendary:
+    slot: 24
+    action: open:legendary
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTdiZmIxZGE2NTU0NjgzODY2Y2QwYmFhNzQ0OTc3ZDAyM2MyMzEzNjYwZDMyYmI3NTM5MmVlZjczYmQwNTc1MyJ9fX0=
+      custom-name: '{colors}<b>Legendary collection</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>🎣 Global catches</white><gray>: <global-caught>.</gray> '
+      - ' '
+  mythic:
+    slot: 29
+    action: open:mythic
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTM1ZDNmMzExNTJhMTNhMjk4MGMyOThkOGFmZjc5Y2RjYTllNjUwNjQ0NTU4ZmYyYTA0OTk0YzZmMDY3ZmIyMiJ9fX0=
+      custom-name: '{colors}<b>Mythic collection</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>🎣 Global catches</white><gray>: <global-caught>.</gray> '
+      - ' '
+  divine:
+    slot: 30
+    action: open:divine
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTAyNWI0YzYwM2M3OGUxMjIwNGQyNTI0Y2FjNTZjZmZjN2U4OTJhN2QzZmFmNTc2YmRlYmNjYzIwNDU5ZTVjOSJ9fX0=
+      custom-name: '{colors}<b>Divine collection</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>🎣 Global catches</white><gray>: <global-caught>.</gray> '
+      - ' '
+  complete:
+    slot: 32
+    action: open:complete
+    material: NETHER_STAR
+    components:
+      custom-name: '{colors}<b>Complete FishDex</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>🎣 Global catches</white><gray>: <global-caught>.</gray> '
+      - ' '
+  previous:
+    action: previous_page
+    slot: 48
+    sound: minecraft:item.book.page_turn
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjFiNzAyZmYzMDRiOTNkNGUwNmVhMjYzODZiMzA4MWY5NjBjYWZjNjY5MDZlYjY5OWMyZTE0Yjg2MmRhMjYyMCJ9fX0=
+      custom-name: '{colors}<b>« Previous</b>{/colors}'
+  next:
+    action: next_page
+    slot: 50
+    sound: minecraft:item.book.page_turn
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOThjMzVjY2ZmNWY4MWYxNzk3NGZhZmYzYjMwNGRjZjkwZTUxZmNlODdkNDZkOGQ0MzY4ZWMzMmM2MzBmYTE3MyJ9fX0=
+      custom-name: '{colors}<b>Next »</b>{/colors}'
+  close:
+    action: close
+    slot: 49
+    sound: minecraft:ui.button.click
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWVjMWExZjQxZGMwOGFiZWUyYmJlMThhZjcxMDU2NDgyMjhkYWI3NmJiY2Y5N2UxMThjMzFkZjU4ZTM5ZWFlMSJ9fX0=
+      custom-name: '{colors}<b>Close</b>{/colors}'

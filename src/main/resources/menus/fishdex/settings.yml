@@ -1,0 +1,36 @@
+# ==========================================================================
+#  FishDex — global settings (not a menu).
+#
+#  The root menu /fishdex opens is fishdex.yml (grows with 'page:' — no extra index
+#  menus). A file under collections/ is a collection; "_"-files are ignored.
+#  date-format / sort / sort-cycle / grouping: global (they are not set per menu).
+#  The Sort button: left/right cycle the criterion (sort-cycle); shift-click cycles the
+#  grouping (discovered-first | undiscovered-first | mixed) ONLY on A-Z/Z-A. Both the criterion
+#  and the grouping are saved per player. On the data sorts (count/sold/size/biome) the undiscovered
+#  ('???') always go last; Default (engine) is CustomFishing's raw order. 'grouping' is the default.
+#  sort-labels / group-labels: text for <sort-mode>/<group-mode> and friends.
+#  grouping-hint: the <grouping-hint> lore line (a leading <newline> gives it a separator); auto-hides off A-Z/Z-A.
+#  content-layout: default for collections (centered | fill); a collection may override it.
+# ==========================================================================
+
+date-format: "dd/MM/yyyy"
+sort: engine
+sort-cycle: [engine, name, name-desc, count, count-asc, sold, sold-asc, max-size, min-size, biome]
+grouping: mixed
+content-layout: centered
+sort-labels:
+  engine: "Default"
+  name: "Name (A→Z)"
+  name-desc: "Name (Z→A)"
+  count: "Most caught"
+  count-asc: "Least caught"
+  sold: "Most sold"
+  sold-asc: "Least sold"
+  max-size: "Largest size"
+  min-size: "Smallest size"
+  biome: "By biome"
+group-labels:
+  discovered-first: "Discovered first"
+  undiscovered-first: "Undiscovered first"
+  mixed: "Mixed"
+grouping-hint: " <newline> <white>Grouping:</white> <gray><group-mode> (shift-click).</gray> "

@@ -1,0 +1,121 @@
+# Divine collection. Self-contained menu; edit freely.
+category: divine_fishes
+title: '{colors}<b>Divine</b>{/colors} <white><page>/<page-count></white>'
+colors:
+- '#FCBDE3'
+- '#F973C4'
+rows: 6
+content-slots: 18-35
+open-sound: minecraft:entity.fishing_bobber.splash
+filler:
+  enabled: false
+decorations:
+  corners:
+    slots: 0,8,45,53
+    material: PINK_STAINED_GLASS_PANE
+    components:
+      hide-tooltip: true
+  edges:
+    slots: 1,7,46,52
+    material: PINK_STAINED_GLASS_PANE
+    components:
+      hide-tooltip: true
+  coral-fan:
+    slots: 2,6,47,51
+    material: BRAIN_CORAL_FAN
+    components:
+      hide-tooltip: true
+  coral:
+    slots: 3,4,5,48,49,50
+    material: BRAIN_CORAL
+    components:
+      hide-tooltip: true
+  sightings:
+    slots: '4'
+    material: SPYGLASS
+    components:
+      custom-name: '{colors}<b>Sightings</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>👤 Player</white><gray>: <player>.</gray> '
+      - ' <white>🔎 Sightings</white><gray>: <discovered-padded>/<total-padded>.</gray> '
+      - ' <white>🐟 Progress</white> <progress-bar> <gray><progress>%</gray> '
+      - ' '
+discovered:
+  components:
+    custom-name: '{colors}<name-plain>{/colors}'
+    lore:
+    - ' '
+    - ' {colors}Personal{/colors} <white><head:%player_uuid%></white> '
+    - '  <white>• Caught</white><gray>: <count>.</gray> '
+    - '  <white>• Sold</white><gray>: <sold>.</gray> '
+    - '  <white>• Sizes</white><gray>: <min>cm - <max>cm.</gray> '
+    - '  <white>• Biome</white><gray>: <last-biome>.</gray> '
+    - '  <white>• First catch</white><gray>: <first-catch>.</gray> '
+    - '  <white>• Last catch</white><gray>: <last-catch>.</gray> '
+    - ' '
+    - ' {colors}Server{/colors} '
+    - '  <white>• First catch</white><gray>: <discoverer> [<discovered-date>].</gray> '
+    - '  <white>• Last catch</white><gray>: <last-size>cm [<last-catcher>, <last-catch-date>].</gray> '
+    - '  <white>• Record</white><gray>: <record>cm [<record-holder>, <record-date>].</gray> '
+    - ' '
+    - ' <b>{colors}-= DIVINE =-{/colors}</b> '
+    - ' '
+undiscovered:
+  material: PLAYER_HEAD
+  components:
+    profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGNlYTZmZTA5MDBmZWNlZTRkNTk1NmMzYWVjNWRiYTU4NDVlYTZmMDMwZmRmNGEwY2E5ZDVhNGU2ZTQ1YWFhNyJ9fX0=
+    custom-name: '{colors}<b>¿ <name-plain> ?</b>{/colors}'
+    lore:
+    - ' '
+    - '  <gray>Catch it at least once  '
+    - '  <gray>to unlock your stats. '
+    - ' '
+    - ' <b>{colors}-= DIVINE =-{/colors}</b> '
+    - ' '
+buttons:
+  back:
+    slot: 45
+    action: open:root
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTAyNWI0YzYwM2M3OGUxMjIwNGQyNTI0Y2FjNTZjZmZjN2U4OTJhN2QzZmFmNTc2YmRlYmNjYzIwNDU5ZTVjOSJ9fX0=
+      custom-name: '{colors}<b>« Back to collections</b>{/colors}'
+  previous:
+    action: previous_page
+    slot: 48
+    sound: minecraft:item.book.page_turn
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWQ4Y2JiMjQ2YzQwMDFiYjY1YjNkZDAyNDYyYTk5ZTQ3ZGE1ODkyODQ3MjRjMGFiZjExYzYxY2NjNjUyZjMzYyJ9fX0=
+      custom-name: '{colors}<b>« Previous</b>{/colors}'
+  next:
+    action: next_page
+    slot: 50
+    sound: minecraft:item.book.page_turn
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTIwMmQxZDI4M2QxOTJkNDEyMTk3OWQxMDFiMjg1M2YyYjUzNTkwNDUzYzA0NjI2NTEwYjVhNGFlNzY5ZWU3YSJ9fX0=
+      custom-name: '{colors}<b>Next »</b>{/colors}'
+  close:
+    action: close
+    slot: 49
+    sound: minecraft:ui.button.click
+    material: PLAYER_HEAD
+    components:
+      profile: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTlmYjgwOWFkMTBhNTRlMjE0NTgwNTg5MzVlZGZjYjI3MDJmYzJmMGU2ZGM5ODM0NmY2MjYwYWJmM2YwZGM2ZCJ9fX0=
+      custom-name: '{colors}<b>Close</b>{/colors}'
+  sort:
+    action: sort
+    slot: 0
+    sound: minecraft:ui.button.click
+    material: HOPPER
+    components:
+      custom-name: '{colors}<b>Sort</b>{/colors}'
+      lore:
+      - ' '
+      - ' <white>Order:</white> <gray><sort-mode>.</gray> '
+      - ' <white>Left:</white> <gray><next-sort-mode>.</gray> '
+      - ' <white>Right:</white> <gray><prev-sort-mode>.</gray> '
+      - '<grouping-hint>'
+      - ' '

@@ -1,0 +1,47 @@
+name: FishDex
+version: '${version}'
+main: com.cesarcosmico.fishdex.FishDexPlugin
+loader: com.cesarcosmico.fishdex.FishDexLoader
+api-version: '26.2'
+authors: [ CesarCosmico ]
+description: A configurable FishDex with server records and catch statistics for CustomFishing.
+website: https://github.com/CesarSanchezGomez/FishDex
+
+dependencies:
+  server:
+    CustomFishing:
+      load: BEFORE
+      required: true
+      join-classpath: true
+    PlaceholderAPI:
+      load: BEFORE
+      required: false
+      join-classpath: true
+
+permissions:
+  fishdex.*:
+    description: Full access to FishDex.
+    default: op
+    children:
+      fishdex.use: true
+      fishdex.admin: true
+  fishdex.use:
+    description: Player access (open the FishDex).
+    default: true
+    children:
+      fishdex.command.open: true
+  fishdex.admin:
+    description: Administrator access (reload, version).
+    default: op
+    children:
+      fishdex.command.reload: true
+      fishdex.command.version: true
+  fishdex.command.open:
+    description: Open the FishDex with /fishdex [menu].
+    default: true
+  fishdex.command.reload:
+    description: Reload the configuration with /fishdex reload.
+    default: op
+  fishdex.command.version:
+    description: Show the plugin and engine versions with /fishdex version.
+    default: op

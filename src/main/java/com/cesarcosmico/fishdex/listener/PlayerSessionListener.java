@@ -1,0 +1,26 @@
+package com.cesarcosmico.fishdex.listener;
+
+import com.cesarcosmico.fishdex.service.PreferenceService;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+
+public final class PlayerSessionListener implements Listener {
+
+    private final PreferenceService preferences;
+
+    public PlayerSessionListener(PreferenceService preferences) {
+        this.preferences = preferences;
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        preferences.load(event.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        preferences.evict(event.getPlayer().getUniqueId());
+    }
+}

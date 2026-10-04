@@ -1,0 +1,10 @@
+# ==========================================================================
+#  FishDex — general settings. Keys use kebab-case.
+#  Database settings live in database.yml, commands in commands.yml and the
+#  menus in menus/fishdex/. Reload with /fishdex reload.
+# ==========================================================================
+
+config-version: 1
+
+# Language file loaded from lang/<language>.yml
+language: en_US        # en_US | es_ES

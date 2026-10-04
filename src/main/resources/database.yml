@@ -1,0 +1,33 @@
+# ==========================================================================
+#  FishDex — database settings (kebab-case keys). Applied on server start;
+#  changing them needs a restart (not picked up by /fishdex reload).
+#
+#  type: which backend to use. sqlite reads the 'sqlite' block; mysql and
+#  mariadb each read their own block (they share the schema, only the JDBC
+#  driver differs). JDBC drivers are downloaded on first start.
+# ==========================================================================
+
+config-version: 1
+
+type: sqlite              # sqlite | mysql | mariadb
+
+sqlite:
+  file: data.db           # created inside this plugin's data folder
+
+mysql:
+  host: localhost
+  port: 3306
+  database: fishdex
+  username: root
+  password: ""
+  pool-size: 10
+  properties: "useSSL=false&characterEncoding=utf8"
+
+mariadb:
+  host: localhost
+  port: 3306
+  database: fishdex
+  username: root
+  password: ""
+  pool-size: 10
+  properties: "useSSL=false&characterEncoding=utf8"
